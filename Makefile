@@ -20,5 +20,5 @@ python:
 	pip install -r python/requirements.txt
 	
 # starts a jupyter notebook
-jupyter:
+jupyter: python
 	jupyter lab
