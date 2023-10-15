@@ -1,3 +1,9 @@
 numpy
 pandas
 black
+
+jupyterlab
+
+# huggingface
+transformers
+datasets

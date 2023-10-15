@@ -19,3 +19,6 @@ python:
 	pyenv local venv-3.10.13
 	pip install -r python/requirements.txt
 	
+# starts a jupyter notebook
+jupyter:
+	jupyter lab
