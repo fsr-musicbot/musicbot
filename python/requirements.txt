@@ -1,9 +1,16 @@
+# data science
 numpy
 pandas
+
+# formatting
 black
 
+# notebooks
 jupyterlab
 
 # huggingface
 transformers
 datasets
+
+# ml framework
+torch

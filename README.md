@@ -13,4 +13,5 @@
 
 ### Jupyter notebook
 
-1. `make jupyter`
+1. `make jupyter` will start an interactive notebook for prototyping.
+2. Alternatively, you can open an `.ipynb` notebook in VSCode. Click the play button, and it should connect to the kernel automatically.
