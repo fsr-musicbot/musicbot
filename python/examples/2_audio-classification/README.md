@@ -1,0 +1,1 @@
+Run with `PYTORCH_ENABLE_MPS_FALLBACK=1` env var

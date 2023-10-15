@@ -1,6 +1,7 @@
 # data science
 numpy
 pandas
+numba
 
 # formatting
 black
@@ -12,6 +13,12 @@ ipywidgets
 # huggingface
 transformers
 datasets
+evaluate
+accelerate
 
 # ml framework
 torch
+
+# audio
+soundfile # read/write sound files
+librosa # music and audio analysis
