@@ -1,10 +1,21 @@
 # Musicbot
 
+- [Musicbot](#musicbot)
+  - [Setup](#setup)
+  - [VSCode](#vscode)
+  - [Python](#python)
+    - [Jupyter notebook](#jupyter-notebook)
+
 ## Setup
 
 1. `cd musicbot`
 2. Install system dependencies `make setup-system`
 3. Open a new terminal tab and run `make setup-python`
+
+## VSCode
+
+1. `cmd+shift+p`: "Install code command in PATH"
+2. Then in a new terminal, `cd musicbot && code .`. This should pick up on the shell config (including the venv).
 
 ## Python
 
