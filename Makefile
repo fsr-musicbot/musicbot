@@ -1,4 +1,4 @@
-.PHONY: python
+.PHONY: python javascript
 
 # installs python and pnpm
 setup-system:
@@ -22,3 +22,7 @@ python:
 # starts a jupyter notebook
 jupyter: python
 	jupyter lab
+
+
+javascript:
+	pnpm -C javascript install 
