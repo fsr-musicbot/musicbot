@@ -3,7 +3,7 @@
 - [Research](#research)
   - [Text-to-speech](#text-to-speech)
   - [Text-to-music](#text-to-music)
-  - [Voice-to-voice](#voice-to-voice)
+  - [Voice-to-voice (voice conversion)](#voice-to-voice-voice-conversion)
     - [Singing voice conversion (SVC)](#singing-voice-conversion-svc)
       - [Diff-SVC](#diff-svc)
       - [So-VITS](#so-vits)
@@ -13,7 +13,7 @@
     - [Audio to MIDI](#audio-to-midi)
   - [Voice-to-MIDI](#voice-to-midi)
   - [MIDI-to-voice](#midi-to-voice)
-  - [Audio effects (e.g. EQ)](#audio-effects-eg-eq)
+  - [Audio effects and analysis (e.g. EQ)](#audio-effects-and-analysis-eg-eq)
   - [Running models](#running-models)
 
 ## Text-to-speech
@@ -40,7 +40,7 @@
 - Beatoven
   - https://www.beatoven.ai/ - Make music for moods
 
-## Voice-to-voice
+## Voice-to-voice (voice conversion)
 
 ### Singing voice conversion (SVC)
 
@@ -58,6 +58,7 @@
 
 ### Plain voice conversion
 
+- https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI
 - https://elevenlabs.io/
 - https://app.uberduck.ai/voice-to-voice - not really singing, more like plain voices or rap music
 
@@ -71,6 +72,7 @@
 Separating vocals/instrumental.
 
 - https://huggingface.co/spaces/abidlabs/music-separation
+- https://github.com/Anjok07/ultimatevocalremovergui
 - https://mvsep.com/en
 - https://www.lalal.ai/
 - https://www.stemroller.com/
@@ -88,10 +90,12 @@ Separating vocals/instrumental.
 
 - https://github.com/ORI-Muchim/Midi-to-Singing-Voice-Conversion - takes lyrics, MIDI and a voice, and creates a song with the voice singing the lyrics
 
-## Audio effects (e.g. EQ)
+## Audio effects and analysis (e.g. EQ)
 
 - https://www.soundtheory.com/home - Gullfoss: AI assisted EQ
 - https://engineering.atspotify.com/2021/09/introducing-pedalboard-spotifys-audio-effects-library-for-python/ - distortion, convolution, reverb, other DAW effects in Python.
+- https://github.com/Dream-High/RMVPE - pitch estimation
+- https://github.com/openvpi/audio-slicer - slice audio into pieces and remove silences
 
 ## Running models
 
