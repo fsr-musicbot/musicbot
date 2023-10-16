@@ -9,6 +9,8 @@
     - [Plain voice conversion](#plain-voice-conversion)
   - [Text-to-speech](#text-to-speech)
   - [Stemming](#stemming)
+  - [Voice-to-MIDI](#voice-to-midi)
+  - [MIDI-to-voice](#midi-to-voice)
 
 ## Text-to-music
 
@@ -48,3 +50,11 @@ Separating vocals from instrumental.
 - https://huggingface.co/spaces/abidlabs/music-separation
 - https://mvsep.com/en
 - https://www.lalal.ai/
+
+## Voice-to-MIDI
+
+- https://vochlea.com/
+
+## MIDI-to-voice
+
+- https://github.com/ORI-Muchim/Midi-to-Singing-Voice-Conversion - takes lyrics, MIDI and a voice, and creates a song with the voice singing the lyrics
