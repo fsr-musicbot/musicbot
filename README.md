@@ -6,6 +6,7 @@
   - [Python](#python)
     - [Jupyter notebook](#jupyter-notebook)
   - [JavaScript](#javascript)
+  - [Troubleshooting](#troubleshooting)
 
 ## Setup
 
@@ -33,3 +34,7 @@
 1. `cd musicbot/javascript`
 2. `pnpm install` to install dependencies
 3. `pnpm run dev` is an example script inside `package.json`. It uses `tsx` to run TypeScript.
+
+## Troubleshooting
+
+- Issues with `ffmpeg`? Run `ffmpeg -version`. If error, then do `brew update`, `brew upgrade`, `brew reinstall ffmpeg`.
