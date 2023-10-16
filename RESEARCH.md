@@ -45,11 +45,13 @@
 
 ## Stemming
 
-Separating vocals from instrumental.
+Separating vocals/instrumental.
 
 - https://huggingface.co/spaces/abidlabs/music-separation
 - https://mvsep.com/en
 - https://www.lalal.ai/
+- https://www.stemroller.com/
+- https://samplab.com/ (this one converts each stem to MIDI too and lets you edit it)
 
 ## Voice-to-MIDI
 
