@@ -5,6 +5,7 @@ numba
 
 # formatting
 black
+ruff
 
 # notebooks
 jupyterlab
@@ -22,3 +23,7 @@ torch
 # audio
 soundfile # read/write sound files
 librosa # music and audio analysis
+
+# other
+python-dotenv
+requests

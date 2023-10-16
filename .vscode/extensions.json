@@ -4,7 +4,7 @@
     "ms-python.python",
     "ms-python.vscode-pylance",
     "ms-toolsai.jupyter",
-    "ms-python.isort",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "charliermarsh.ruff"
   ]
 }
