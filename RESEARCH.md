@@ -9,9 +9,10 @@
       - [So-VITS](#so-vits)
     - [Plain voice conversion](#plain-voice-conversion)
   - [Stemming](#stemming)
+    - [Audio to MIDI](#audio-to-midi)
   - [Voice-to-MIDI](#voice-to-midi)
   - [MIDI-to-voice](#midi-to-voice)
-  - [EQ](#eq)
+  - [Audio effects (e.g. EQ)](#audio-effects-eg-eq)
   - [Running models](#running-models)
 
 ## Text-to-speech
@@ -54,7 +55,12 @@ Separating vocals/instrumental.
 - https://mvsep.com/en
 - https://www.lalal.ai/
 - https://www.stemroller.com/
+
+### Audio to MIDI
+
 - https://samplab.com/ (this one converts each stem to MIDI too and lets you edit it)
+- https://github.com/spotify/basic-pitch
+-
 
 ## Voice-to-MIDI
 
@@ -64,9 +70,10 @@ Separating vocals/instrumental.
 
 - https://github.com/ORI-Muchim/Midi-to-Singing-Voice-Conversion - takes lyrics, MIDI and a voice, and creates a song with the voice singing the lyrics
 
-## EQ
+## Audio effects (e.g. EQ)
 
 - https://www.soundtheory.com/home - Gullfoss: AI assisted EQ
+- https://engineering.atspotify.com/2021/09/introducing-pedalboard-spotifys-audio-effects-library-for-python/ - distortion, convolution, reverb, other DAW effects in Python.
 
 ## Running models
 
