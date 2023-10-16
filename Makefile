@@ -24,6 +24,5 @@ python:
 jupyter: python
 	jupyter lab
 
-
 javascript:
 	pnpm -C javascript install 
