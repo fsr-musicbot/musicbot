@@ -5,6 +5,7 @@
     "ms-python.vscode-pylance",
     "ms-toolsai.jupyter",
     "esbenp.prettier-vscode",
-    "charliermarsh.ruff"
+    "charliermarsh.ruff",
+    "yzhang.markdown-all-in-one"
   ]
 }
