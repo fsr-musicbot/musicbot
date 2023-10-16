@@ -11,10 +11,13 @@
   - [Stemming](#stemming)
   - [Voice-to-MIDI](#voice-to-midi)
   - [MIDI-to-voice](#midi-to-voice)
+  - [EQ](#eq)
+  - [Running models](#running-models)
 
 ## Text-to-music
 
-- https://huggingface.co/spaces/facebook/MusicGen - good for melodies, instrumentals. Maybe we need to separate the vocals from the audio. It can play instruments, conditioned on a melody. It seems to ignore the vocals from the input file.
+- https://github.com/facebookresearch/audiocraft - good for melodies, instrumentals. Maybe we need to separate the vocals from the audio. It can play instruments, conditioned on a melody. It seems to ignore the vocals from the input file.
+  - https://huggingface.co/spaces/facebook/MusicGen
 - https://openai.com/research/jukebox - music completions, new lyrics, conditioning
 - https://www.beatoven.ai/ - Make music for moods
 
@@ -60,3 +63,11 @@ Separating vocals/instrumental.
 ## MIDI-to-voice
 
 - https://github.com/ORI-Muchim/Midi-to-Singing-Voice-Conversion - takes lyrics, MIDI and a voice, and creates a song with the voice singing the lyrics
+
+## EQ
+
+- https://www.soundtheory.com/home - Gullfoss: AI assisted EQ
+
+## Running models
+
+- Replicate e.g. https://replicate.com/meta/musicgen
