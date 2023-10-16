@@ -22,11 +22,20 @@
 
 ## Text-to-music
 
-- https://github.com/facebookresearch/audiocraft - good for melodies, instrumentals. Maybe we need to separate the vocals from the audio. It can play instruments, conditioned on a melody. It seems to ignore the vocals from the input file.
+- AudioCraft: MusicGen (Meta)
+  - https://github.com/facebookresearch/audiocraft - good for melodies, instrumentals. Maybe we need to separate the vocals from the audio. It can play instruments, conditioned on a melody. It seems to ignore the vocals from the input file.
   - https://huggingface.co/spaces/facebook/MusicGen
-- https://google-research.github.io/seanet/musiclm/examples/
-- https://openai.com/research/jukebox - music completions, new lyrics, conditioning
-- https://www.beatoven.ai/ - Make music for moods
+- MusicLM (Google)
+  - https://google-research.github.io/seanet/musiclm/examples/
+- AudioLDM
+  - https://audioldm.github.io/audioldm2/
+- OpenAI
+  - https://openai.com/research/jukebox - music completions, new lyrics, conditioning
+- Dance Diffusion
+  - https://wandb.ai/wandb_gen/audio/reports/A-Gentle-Introduction-to-Dance-Diffusion--VmlldzoyNjg1Mzky
+  - https://drive.google.com/file/d/1nEFEpK27v0nytNXmmYQb06X_RI6kKPve/view - guide
+- Beatoven
+  - https://www.beatoven.ai/ - Make music for moods
 
 ## Voice-to-voice
 
