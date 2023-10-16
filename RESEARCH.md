@@ -24,6 +24,7 @@
 
 - https://github.com/facebookresearch/audiocraft - good for melodies, instrumentals. Maybe we need to separate the vocals from the audio. It can play instruments, conditioned on a melody. It seems to ignore the vocals from the input file.
   - https://huggingface.co/spaces/facebook/MusicGen
+- https://google-research.github.io/seanet/musiclm/examples/
 - https://openai.com/research/jukebox - music completions, new lyrics, conditioning
 - https://www.beatoven.ai/ - Make music for moods
 
