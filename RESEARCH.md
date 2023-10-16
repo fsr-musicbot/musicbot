@@ -18,6 +18,7 @@
   - https://github.com/svc-develop-team/so-vits-svc
 - https://docs.google.com/spreadsheets/d/1qzeFdpUPr7E0jOFwWSXd8LF30ZLjz1CSVEBiG8gPHTU/edit#gid=1792554832 - Models for various artists 🙀
 - https://colab.research.google.com/drive/1z31ZfcisCXCSGA5jeid0UNjiHb9oupuV#scrollTo=oFr2MWaQfR6X
+- https://app.uberduck.ai/voice-to-voice - not really singing, more like plain voices or rap music
 
 ## Text-to-speech
 
