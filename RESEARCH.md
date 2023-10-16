@@ -1,18 +1,22 @@
 # Research
 
 - [Research](#research)
+  - [Text-to-speech](#text-to-speech)
   - [Text-to-music](#text-to-music)
   - [Voice-to-voice](#voice-to-voice)
     - [Singing voice conversion (SVC)](#singing-voice-conversion-svc)
       - [Diff-SVC](#diff-svc)
       - [So-VITS](#so-vits)
     - [Plain voice conversion](#plain-voice-conversion)
-  - [Text-to-speech](#text-to-speech)
   - [Stemming](#stemming)
   - [Voice-to-MIDI](#voice-to-midi)
   - [MIDI-to-voice](#midi-to-voice)
   - [EQ](#eq)
   - [Running models](#running-models)
+
+## Text-to-speech
+
+- https://github.com/neonbjb/tortoise-tts
 
 ## Text-to-music
 
@@ -41,10 +45,6 @@
 
 - https://elevenlabs.io/
 - https://app.uberduck.ai/voice-to-voice - not really singing, more like plain voices or rap music
-
-## Text-to-speech
-
-- https://github.com/neonbjb/tortoise-tts
 
 ## Stemming
 
