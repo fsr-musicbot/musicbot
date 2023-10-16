@@ -8,6 +8,7 @@
       - [Diff-SVC](#diff-svc)
       - [So-VITS](#so-vits)
     - [Plain voice conversion](#plain-voice-conversion)
+  - [Music-to-music](#music-to-music)
   - [Stemming](#stemming)
     - [Audio to MIDI](#audio-to-midi)
   - [Voice-to-MIDI](#voice-to-midi)
@@ -46,6 +47,11 @@
 
 - https://elevenlabs.io/
 - https://app.uberduck.ai/voice-to-voice - not really singing, more like plain voices or rap music
+
+## Music-to-music
+
+- https://magenta.tensorflow.org/music-vae - blending/interpolation between music
+- https://experiments.withgoogle.com/ai/beat-blender/view/
 
 ## Stemming
 
