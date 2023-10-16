@@ -27,6 +27,9 @@
   - https://huggingface.co/spaces/facebook/MusicGen
 - MusicLM (Google)
   - https://google-research.github.io/seanet/musiclm/examples/
+- MusicLDM
+  - https://musicldm.github.io/
+  - They say they are better than Riffusion, AudioLDM, MuBERT
 - AudioLDM
   - https://audioldm.github.io/audioldm2/
 - OpenAI
