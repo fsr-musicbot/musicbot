@@ -67,7 +67,6 @@ Separating vocals/instrumental.
 
 - https://samplab.com/ (this one converts each stem to MIDI too and lets you edit it)
 - https://github.com/spotify/basic-pitch
--
 
 ## Voice-to-MIDI
 
