@@ -7,6 +7,7 @@
     - [Jupyter notebook](#jupyter-notebook)
   - [JavaScript](#javascript)
   - [Troubleshooting](#troubleshooting)
+  - [Audio editing](#audio-editing)
 
 ## Setup
 
@@ -38,3 +39,8 @@
 ## Troubleshooting
 
 - Issues with `ffmpeg`? Run `ffmpeg -version`. If error, then do `brew update`, `brew upgrade`, `brew reinstall ffmpeg`.
+
+## Audio editing
+
+- [Audacity](https://www.audacityteam.org/) - free
+- [Fission](https://rogueamoeba.com/fission/) - paid
