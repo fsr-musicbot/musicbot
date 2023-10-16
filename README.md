@@ -44,3 +44,5 @@
 
 - [Audacity](https://www.audacityteam.org/) - free
 - [Fission](https://rogueamoeba.com/fission/) - paid
+- [GarageBand](https://www.apple.com/mac/garageband/) - free
+- [Logic Pro](https://www.apple.com/logic-pro/) - paid
