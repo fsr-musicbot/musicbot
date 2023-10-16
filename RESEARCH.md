@@ -15,6 +15,7 @@
   - [MIDI-to-voice](#midi-to-voice)
   - [Audio effects and analysis (e.g. EQ)](#audio-effects-and-analysis-eg-eq)
   - [Running models](#running-models)
+  - [UI libraries for audio](#ui-libraries-for-audio)
 
 ## Text-to-speech
 
@@ -100,3 +101,14 @@ Separating vocals/instrumental.
 ## Running models
 
 - Replicate e.g. https://replicate.com/meta/musicgen
+
+## UI libraries for audio
+
+- https://github.com/katspaugh/wavesurfer.js
+  - https://github.com/ShiiRochi/wavesurfer-react
+- https://github.com/bbc/peaks.js
+- https://github.com/ryohey/signal
+- https://github.com/naomiaro/waveform-playlist
+- https://github.com/grimmdude/MidiWriterJS
+- https://github.com/alyssaxuu/motionity
+- https://github.com/ArthurBeaulieu/AudioVisualizer
