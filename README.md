@@ -8,6 +8,7 @@
   - [JavaScript](#javascript)
   - [Troubleshooting](#troubleshooting)
   - [Audio editing](#audio-editing)
+  - [Research](#research)
 
 ## Setup
 
@@ -46,3 +47,7 @@
 - [Fission](https://rogueamoeba.com/fission/) - paid
 - [GarageBand](https://www.apple.com/mac/garageband/) - free
 - [Logic Pro](https://www.apple.com/logic-pro/) - paid
+
+## Research
+
+- https://docs.google.com/spreadsheets/d/1JxU7ohP_io_oanKfflreld1SaABMPdboTUK2IQZmmCk/edit#gid=0
