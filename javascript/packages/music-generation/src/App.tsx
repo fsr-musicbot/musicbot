@@ -3,6 +3,7 @@ import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 // Import WaveSurfer
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 import Timeline from "wavesurfer.js/plugins/timeline";
+import Regions from "wavesurfer.js/plugins/regions";
 
 // WaveSurfer hook
 const useWavesurfer = (
@@ -96,7 +97,7 @@ const App = () => {
           waveColor: "rgb(200, 0, 200)",
           progressColor: "rgb(100, 0, 100)",
           url: "/audio/one.mp3",
-          plugins: [Timeline.create()],
+          plugins: [Timeline.create(), Regions.create()],
         }}
       />
     </div>
