@@ -1,8 +1,8 @@
+import { Button } from "@musicbot/shared";
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
-import Timeline from "wavesurfer.js/plugins/timeline";
 import Regions from "wavesurfer.js/plugins/regions";
-import { Button } from "@musicbot/shared";
+import Timeline from "wavesurfer.js/plugins/timeline";
 
 // WaveSurfer hook
 const useWavesurfer = (

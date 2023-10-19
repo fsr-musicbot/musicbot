@@ -27,6 +27,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      use-file-system:
+        specifier: ^0.0.6
+        version: 0.0.6(react-dom@18.2.0)(react@18.2.0)
       wavesurfer.js:
         specifier: ^7.3.9
         version: 7.3.9
@@ -37,6 +40,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.7
         version: 18.2.14
+      '@types/wicg-file-system-access':
+        specifier: ^2023.10.2
+        version: 2023.10.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.0.0
         version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.51.0)(typescript@5.2.2)
@@ -698,6 +704,10 @@ packages:
 
   /@types/semver@7.5.4:
     resolution: {integrity: sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==}
+    dev: true
+
+  /@types/wicg-file-system-access@2023.10.2:
+    resolution: {integrity: sha512-nSiK8qt0O7sQmDcW3HYfvya7GDoD6ipgdcUFzk3QN+UBIqXeNg38Nh6VnKv7EIPfkVETRiquyMskCbpxUzgX1Q==}
     dev: true
 
   /@typescript-eslint/eslint-plugin@6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.51.0)(typescript@5.2.2):
@@ -1442,7 +1452,6 @@ packages:
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
-    dev: true
 
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -2120,6 +2129,18 @@ packages:
     dependencies:
       punycode: 2.3.0
     dev: true
+
+  /use-file-system@0.0.6(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/o8ZqH5jP6+hgbgrw50OPCP0vZ2jodZ3xtZCIEuGQG1Dr160FiFZg/sgUP8BXqyGSyzzc5+33d7HwuQtfJHVew==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=17'
+      react-dom: '>=17'
+    dependencies:
+      ignore: 5.2.4
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}

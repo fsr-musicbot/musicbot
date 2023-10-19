@@ -10,14 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@musicbot/shared": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "wavesurfer.js": "^7.3.9",
-    "@musicbot/shared": "workspace:*"
+    "use-file-system": "^0.0.6",
+    "wavesurfer.js": "^7.3.9"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/wicg-file-system-access": "^2023.10.2",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
