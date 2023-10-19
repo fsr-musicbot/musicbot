@@ -1,9 +1,8 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
-
-// Import WaveSurfer
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 import Timeline from "wavesurfer.js/plugins/timeline";
 import Regions from "wavesurfer.js/plugins/regions";
+import { Button } from "@musicbot/shared";
 
 // WaveSurfer hook
 const useWavesurfer = (
@@ -44,6 +43,7 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const wavesurfer = useWavesurfer(containerRef, options);
+  const regionsPlugin = options.plugins?.[1] as Regions;
 
   // On play button click
   const onPlayClick = useCallback(() => {
@@ -58,16 +58,24 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
     setCurrentTime(0);
     setIsPlaying(false);
 
+    // allow creation of regions
+    regionsPlugin.enableDragSelection({});
+
     const subscriptions = [
       wavesurfer.on("play", () => setIsPlaying(true)),
       wavesurfer.on("pause", () => setIsPlaying(false)),
       wavesurfer.on("timeupdate", (currentTime) => setCurrentTime(currentTime)),
+
+      // region can be removed by clicking on it
+      regionsPlugin.on("region-clicked", (region) => {
+        region.remove();
+      }),
     ];
 
     return () => {
       subscriptions.forEach((unsub) => unsub());
     };
-  }, [wavesurfer]);
+  }, [wavesurfer, regionsPlugin]);
 
   return (
     <div className="w-full">
@@ -75,10 +83,16 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
         ref={containerRef}
         className="min-h-[120px] bg-gray-100 border rounded-md"
       />
-      <button onClick={onPlayClick} style={{ marginTop: "1em" }}>
-        {isPlaying ? "Pause" : "Play"}
-      </button>
-      <p>Seconds played: {currentTime}</p>
+      <br />
+      <div className="flex flex-col gap-4 items-start">
+        <p>Seconds played: {currentTime}</p>
+        <div className="flex flex-wrap gap-4">
+          <Button onClick={onPlayClick}>{isPlaying ? "Pause" : "Play"}</Button>
+          <Button onClick={() => regionsPlugin.clearRegions()}>
+            Clear all regions
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -90,7 +104,6 @@ const App = () => {
   return (
     <div className="container mx-auto p-8 flex flex-col gap-8 items-start">
       <h1 className="font-bold text-2xl">Musicbot</h1>
-
       <WaveSurferPlayer
         options={{
           height: 100,
