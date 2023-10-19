@@ -76,6 +76,9 @@ importers:
       '@hono/node-server':
         specifier: ^1.2.0
         version: 1.2.0
+      '@hono/zod-validator':
+        specifier: ^0.1.9
+        version: 0.1.9(hono@3.8.1)(zod@3.22.4)
       hono:
         specifier: ^3.7.2
         version: 3.8.1
@@ -555,6 +558,16 @@ packages:
   /@hono/node-server@1.2.0:
     resolution: {integrity: sha512-aHT8lDMLpd7ioXJ1/057+h+oE/k7rCOWmjklYDsE0jE4CoNB9XzG4f8dRHvw4s5HJFocaYDiGgYM/V0kYbQ0ww==}
     engines: {node: '>=18.0.0'}
+    dev: false
+
+  /@hono/zod-validator@0.1.9(hono@3.8.1)(zod@3.22.4):
+    resolution: {integrity: sha512-qEG5xagKzyif283ldCKzp+aF9Aebclg0sfrgyRQQNAizmXpicZ3UGduST/Jp+a9bjt3mI+VyEXMftb4rogLxQA==}
+    peerDependencies:
+      hono: 3.*
+      zod: ^3.19.1
+    dependencies:
+      hono: 3.8.1
+      zod: 3.22.4
     dev: false
 
   /@humanwhocodes/config-array@0.11.11:
