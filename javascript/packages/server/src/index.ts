@@ -5,7 +5,7 @@ import { z } from "zod";
 
 const app = new Hono();
 
-app.get("/", (c) => c.text("Hello Hono!"));
+app.get("/", (c) => c.text("Hello world!"));
 
 app.post("/test", zValidator("json", z.object({ name: z.string() })), (c) => {
   console.log(c.body);
