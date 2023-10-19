@@ -16,7 +16,7 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
-  packages/music-generation:
+  packages/client-music-gen:
     dependencies:
       '@musicbot/shared':
         specifier: workspace:*
