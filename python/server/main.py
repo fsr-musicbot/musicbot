@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 from contextlib import asynccontextmanager
+import whisper
 
 from anyio.streams.file import FileWriteStream
 from fastapi import FastAPI
@@ -71,3 +72,14 @@ def generate_music(body: MusicGenRequestBody):
 
     # Your code for generating music goes here
     return {"success": True}
+
+class LyricsGenRequestBody(BaseModel):
+    file_path: str
+    start_time: float
+    end_time: float
+
+@app.post("/whisper")
+def generate_lyrics(body: LyricsGenRequestBody): 
+    model = whisper.load_model("base")
+    result = model.transcribe(body.file_path)
+    print(result["text"])
