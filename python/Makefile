@@ -14,7 +14,7 @@ install-dependencies: set-env
 	pip install -r requirements.txt
 
 server: install-dependencies
-	uvicorn main:app --reload
+	uvicorn server.main:app --reload
 
 jupyter: install-dependencies
 	jupyter lab
