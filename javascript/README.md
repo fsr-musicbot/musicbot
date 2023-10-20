@@ -23,7 +23,6 @@
 - Clients
   - `app-ui`: NextJS app with Dropzone / drag drop
   - `client-music-gen`: Vite app with waveform display
-- `server`: uses Hono.js, which is kind of like Express
 - `shared`: has some shared code, like a shared button component
 
 ## Installing new dependencies
