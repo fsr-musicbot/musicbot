@@ -1,8 +1,44 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+import json
+import os
 import subprocess
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+from anyio.streams.file import FileWriteStream
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+dirname = os.path.dirname(__file__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    A context manager that mounts and unmounts the application's lifespan.
+
+    Args:
+        app (FastAPI): The FastAPI application instance.
+    """
+    # mount
+    path = os.path.join(dirname, "openapi.json")
+    schema = json.dumps(app.openapi(), indent=2).encode("utf-8")
+    async with await FileWriteStream.from_path(path) as stream:
+        await stream.send(schema)
+
+    # unmount
+    yield
+    # unmount code here
+
+
+app = FastAPI(lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")

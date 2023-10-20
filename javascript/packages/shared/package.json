@@ -7,6 +7,7 @@
   "types": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-openapi-client": "pnpm openapi-zod-client '../../../python/server/openapi.json' -o './src/lib/openapi.ts'",
     "preinstall": "npx -y only-allow pnpm"
   },
   "keywords": [],
@@ -14,10 +15,15 @@
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.2.15",
+    "openapi-zod-client": "^1.13.0",
     "react": "^18.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "wait-on": "^7.0.1"
   },
   "dependencies": {
-    "clsx": "^2.0.0"
+    "@zodios/core": "^10.9.6",
+    "axios": "^1.5.1",
+    "clsx": "^2.0.0",
+    "zod": "^3.22.4"
   }
 }
