@@ -3,8 +3,7 @@ numpy
 pandas
 numba
 
-# formatting
-black
+# formatting and linting
 ruff
 
 # notebooks
@@ -27,3 +26,6 @@ librosa # music and audio analysis
 # other
 python-dotenv
 requests
+
+# server
+flask
