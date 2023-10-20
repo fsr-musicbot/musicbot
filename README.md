@@ -1,7 +1,7 @@
 # Musicbot
 
 - [Musicbot](#musicbot)
-  - [Setup](#setup)
+  - [Setups](#setups)
   - [VSCode](#vscode)
   - [Python](#python)
     - [Jupyter notebook](#jupyter-notebook)
@@ -10,7 +10,7 @@
   - [Audio editing](#audio-editing)
   - [Research](#research)
 
-## Setup
+## Setups
 
 1. `cd musicbot`
 2. Install system dependencies `make setup-system`
