@@ -1,4 +1,4 @@
-import { Button, apiHooks } from "@musicbot/shared";
+import { Button, api, apiHooks } from "@musicbot/shared";
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 import Regions from "wavesurfer.js/plugins/regions";
@@ -100,6 +100,8 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
 export const IndexRoute = () => {
   const { mutate } = apiHooks.useMutation("post", "/musicgen");
 
+  const { data } = apiHooks.useQuery("/");
+  console.log(data);
   // Render the wavesurfer component
   // and a button to load a different audio file
   return (
