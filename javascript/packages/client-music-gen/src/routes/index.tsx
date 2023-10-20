@@ -97,9 +97,8 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
   );
 };
 
-// Another React component that will render two wavesurfers
-const App = () => {
-  const { mutateAsync } = apiHooks.usePost("/musicgen");
+export const IndexRoute = () => {
+  const { mutate } = apiHooks.useMutation("post", "/musicgen");
 
   // Render the wavesurfer component
   // and a button to load a different audio file
@@ -116,19 +115,19 @@ const App = () => {
         }}
       />
       <Button
-        onClick={async () =>
-          mutateAsync({
+        onClick={(e) => {
+          e.preventDefault();
+          console.log("welkjfwelk");
+          mutate({
             file_path:
               "/Users/sarimabbas/Developer/fsr/musicbot/javascript/packages/client-music-gen/public/audio/blinding_lights/blinding_lights_instrumental.mp3",
             end_time: 10,
             start_time: 2,
-          })
-        }
+          });
+        }}
       >
         Generate
       </Button>
     </div>
   );
 };
-
-export default App;
