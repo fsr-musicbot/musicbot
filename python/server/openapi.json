@@ -89,7 +89,11 @@
           }
         },
         "type": "object",
-        "required": ["file_path", "start_time", "end_time"],
+        "required": [
+          "file_path",
+          "start_time",
+          "end_time"
+        ],
         "title": "MusicGenRequestBody"
       },
       "ValidationError": {
@@ -118,7 +122,11 @@
           }
         },
         "type": "object",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "title": "ValidationError"
       }
     }

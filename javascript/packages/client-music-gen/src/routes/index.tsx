@@ -1,4 +1,4 @@
-import { Button } from "@musicbot/shared";
+import { Button, apiHooks } from "@musicbot/shared";
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 import Regions from "wavesurfer.js/plugins/regions";
@@ -84,7 +84,7 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
         className="min-h-[120px] bg-gray-100 border rounded-md"
       />
       <br />
-      <div className="flex flex-col gap-4 items-start">
+      <div className="flex flex-col items-start gap-4">
         <p>Seconds played: {currentTime}</p>
         <div className="flex flex-wrap gap-4">
           <Button onClick={onPlayClick}>{isPlaying ? "Pause" : "Play"}</Button>
@@ -97,13 +97,16 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
   );
 };
 
-// Another React component that will render two wavesurfers
-const App = () => {
+export const IndexRoute = () => {
+  const { mutate } = apiHooks.useMutation("post", "/musicgen");
+
+  const { data } = apiHooks.useQuery("/");
+  console.log(data);
   // Render the wavesurfer component
   // and a button to load a different audio file
   return (
-    <div className="container mx-auto p-8 flex flex-col gap-8 items-start">
-      <h1 className="font-bold text-2xl">Musicbot</h1>
+    <div className="container flex flex-col items-start gap-8 p-8 mx-auto">
+      <h1 className="text-2xl font-bold">Musicbot</h1>
       <WaveSurferPlayer
         options={{
           height: 100,
@@ -113,8 +116,21 @@ const App = () => {
           plugins: [Timeline.create(), Regions.create()],
         }}
       />
+      <Button
+        disabled
+        onClick={(e) => {
+          e.preventDefault();
+          console.log("welkjfwelk");
+          mutate({
+            file_path:
+              "/Users/sarimabbas/Developer/fsr/musicbot/javascript/packages/client-music-gen/public/audio/blinding_lights/blinding_lights_instrumental.mp3",
+            end_time: 10,
+            start_time: 2,
+          });
+        }}
+      >
+        Generate
+      </Button>
     </div>
   );
 };
-
-export default App;
