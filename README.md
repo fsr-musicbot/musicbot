@@ -1,16 +1,15 @@
 # Musicbot
 
 - [Musicbot](#musicbot)
-  - [Setups](#setups)
+  - [Setup](#setup)
   - [VSCode](#vscode)
   - [Python](#python)
-    - [Jupyter notebook](#jupyter-notebook)
   - [JavaScript](#javascript)
   - [Troubleshooting](#troubleshooting)
   - [Audio editing](#audio-editing)
   - [Research](#research)
 
-## Setups
+## Setup
 
 1. `cd musicbot`
 2. Install system dependencies `make setup-system`
@@ -23,19 +22,11 @@
 
 ## Python
 
-1. Put packages to install in `python/requirements.txt`
-2. Run `make python` to install them
-
-### Jupyter notebook
-
-1. `make jupyter` will start an interactive notebook for prototyping.
-2. Alternatively, you can open an `.ipynb` notebook in VSCode. Click the play button, and select the venv for the kernel.
+See [python/README.md](./python/README.md)
 
 ## JavaScript
 
-1. `cd musicbot/javascript`
-2. `pnpm install` to install dependencies
-3. `pnpm run dev` is an example script inside `package.json`. It uses `tsx` to run TypeScript.
+See [javascript/README.md](./javascript/README.md)
 
 ## Troubleshooting
 
