@@ -9,14 +9,16 @@
 
 - `examples`: random notebooks exploring huggingface
 - `musiclm`: the unofficial way to access Google's MusicLM via http and cached token
-- `server`: simple flask server, that can serve models locally
+- `server`: simple FastAPI server, that can do backend operations and serve models locally
+  - Serves on http://localhost:8000
+  - Has auto-generated OpenAPI docs on http://localhost:8000/docs
 
 ## Installing dependencies
 
-1. Put packages to install in `python/requirements.txt`
-2. Run `cd ~/musicbot && make python` to install them
+1. Put packages to install in `requirements.txt`
+2. Run `make install-dependencies` to install them
 
 ## Jupyter notebook
 
-1. `cd ~/musicbot && make jupyter` will start an interactive notebook for prototyping.
+1. `make jupyter` will start an interactive notebook for prototyping.
 2. Alternatively, you can open an `.ipynb` notebook in VSCode. Click the play button, and select the venv for the kernel.
