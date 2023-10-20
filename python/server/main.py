@@ -7,6 +7,7 @@ from anyio.streams.file import FileWriteStream
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from .musicgen.main import run_musicgen
 
 dirname = os.path.dirname(__file__)
 
@@ -54,6 +55,7 @@ class MusicGenRequestBody(BaseModel):
 
 @app.post("/musicgen")
 def generate_music(body: MusicGenRequestBody):
+    path = os.path.join(dirname, "tmp.mp3")
     # extract a slice of audio from the file path and save it as tmp.mp3
     subprocess.run(
         [
@@ -65,9 +67,11 @@ def generate_music(body: MusicGenRequestBody):
             str(body.start_time),
             "-to",
             str(body.end_time),
-            "tmp.mp3",
+            path,
         ]
     )
+
+    run_musicgen()
 
     # Your code for generating music goes here
     return {"success": True}
