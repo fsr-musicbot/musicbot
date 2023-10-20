@@ -1,4 +1,4 @@
-import { Button } from "@musicbot/shared";
+import { Button, apiHooks } from "@musicbot/shared";
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 import Regions from "wavesurfer.js/plugins/regions";
@@ -99,6 +99,8 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
 
 // Another React component that will render two wavesurfers
 const App = () => {
+  const { mutateAsync } = apiHooks.usePost("/musicgen");
+
   // Render the wavesurfer component
   // and a button to load a different audio file
   return (
@@ -113,6 +115,18 @@ const App = () => {
           plugins: [Timeline.create(), Regions.create()],
         }}
       />
+      <Button
+        onClick={async () =>
+          mutateAsync({
+            file_path:
+              "/Users/sarimabbas/Developer/fsr/musicbot/javascript/packages/client-music-gen/public/audio/blinding_lights/blinding_lights_instrumental.mp3",
+            end_time: 10,
+            start_time: 2,
+          })
+        }
+      >
+        Generate
+      </Button>
     </div>
   );
 };
