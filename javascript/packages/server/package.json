@@ -1,7 +1,8 @@
 {
   "name": "@musicbot/server",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@hono/node-server": "^1.2.0",
