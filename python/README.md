@@ -1,0 +1,3 @@
+- `examples`: random notebooks exploring huggingface
+- `musiclm`: the unofficial way to access Google's MusicLM via http and cached token
+- `server`: simple flask server, that can serve models locally
