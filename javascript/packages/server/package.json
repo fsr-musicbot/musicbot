@@ -1,7 +1,9 @@
 {
   "name": "@musicbot/server",
+  "packageManager": ">pnpm@8.9.2",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "preinstall": "npx -y only-allow pnpm"
   },
   "dependencies": {
     "@hono/node-server": "^1.2.0",
