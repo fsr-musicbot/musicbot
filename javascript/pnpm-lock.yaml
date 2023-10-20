@@ -122,22 +122,34 @@ importers:
 
   packages/shared:
     dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.0.0
+        version: 5.0.0(react-dom@18.2.0)(react@18.2.0)
       '@zodios/core':
         specifier: ^10.9.6
         version: 10.9.6(axios@1.5.1)(zod@3.22.4)
+      '@zodios/react':
+        specifier: ^10.4.5
+        version: 10.4.5(@tanstack/react-query@5.0.0)(@zodios/core@10.9.6)(react@18.2.0)
       axios:
         specifier: ^1.5.1
         version: 1.5.1
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
       zod:
         specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
       '@types/react':
-        specifier: ^18.2.15
+        specifier: ^18.2.29
         version: 18.2.29
+      '@types/react-dom':
+        specifier: ^18.2.14
+        version: 18.2.14
       openapi-zod-client:
         specifier: ^1.13.0
         version: 1.13.0(react@18.2.0)
@@ -846,6 +858,27 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@tanstack/query-core@5.0.0:
+    resolution: {integrity: sha512-Y1BpiA6BblJd/UlVqxEVeAG7IACn568YJuTTItAiecBI7En+33g780kg+/8lhgl+BzcUPN7o+NjBrSRGJoemyQ==}
+    dev: false
+
+  /@tanstack/react-query@5.0.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-diQoC8FNBcO5Uf5yuaJlXthTtbO1xM8kzOX+pSBUMT9n/cqQ/u1wJGCtukvhDWA+6j07WmIj4bfqNbd2KOB6jQ==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 5.0.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@types/babel__core@7.20.3:
     resolution: {integrity: sha512-54fjTSeSHwfan8AyHWrKbfBWiEUrNTZsUwPTDSNaaP1QDQIZbeNUg3a59E9D+375MzUw/x1vx2/0F5LBz+AeYA==}
     dependencies:
@@ -1090,6 +1123,18 @@ packages:
     dependencies:
       axios: 1.5.1
       zod: 3.22.4
+    dev: false
+
+  /@zodios/react@10.4.5(@tanstack/react-query@5.0.0)(@zodios/core@10.9.6)(react@18.2.0):
+    resolution: {integrity: sha512-2jisuquf30bEQg6KzhtYnoutXEQD9uD/I0vBO3d3AzL91SLhFTeHNSk2MwkBj0LL/wCIWt9v0sUL52OMv++EwQ==}
+    peerDependencies:
+      '@tanstack/react-query': 4.x
+      '@zodios/core': '>=10.2.0 <11.0.0'
+      react: '>=16.8.0'
+    dependencies:
+      '@tanstack/react-query': 5.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@zodios/core': 10.9.6(axios@1.5.1)(zod@3.22.4)
+      react: 18.2.0
     dev: false
 
   /acorn-jsx@5.3.2(acorn@8.10.0):

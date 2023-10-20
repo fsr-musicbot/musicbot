@@ -84,7 +84,7 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
         className="min-h-[120px] bg-gray-100 border rounded-md"
       />
       <br />
-      <div className="flex flex-col gap-4 items-start">
+      <div className="flex flex-col items-start gap-4">
         <p>Seconds played: {currentTime}</p>
         <div className="flex flex-wrap gap-4">
           <Button onClick={onPlayClick}>{isPlaying ? "Pause" : "Play"}</Button>
@@ -102,8 +102,8 @@ const App = () => {
   // Render the wavesurfer component
   // and a button to load a different audio file
   return (
-    <div className="container mx-auto p-8 flex flex-col gap-8 items-start">
-      <h1 className="font-bold text-2xl">Musicbot</h1>
+    <div className="container flex flex-col items-start gap-8 p-8 mx-auto">
+      <h1 className="text-2xl font-bold">Musicbot</h1>
       <WaveSurferPlayer
         options={{
           height: 100,
