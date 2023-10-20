@@ -22,10 +22,12 @@ torch
 # audio
 soundfile # read/write sound files
 librosa # music and audio analysis
+audiocraft # facebook model
 
 # other
 python-dotenv
 requests
 
 # server
-flask
+fastapi
+uvicorn[standard]
