@@ -3,11 +3,13 @@
 - [Musicbot](#musicbot)
   - [Setup](#setup)
   - [VSCode](#vscode)
+    - [Recommended extensions](#recommended-extensions)
   - [Python](#python)
   - [JavaScript](#javascript)
   - [Troubleshooting](#troubleshooting)
   - [Audio editing](#audio-editing)
   - [Research](#research)
+  - [Contributing code](#contributing-code)
 
 ## Setup
 
@@ -19,6 +21,10 @@
 
 1. `cmd+shift+p`: "Install code command in PATH"
 2. Then in a new terminal, `cd musicbot && code .`. This should pick up on the shell config (including the venv).
+
+### Recommended extensions
+
+Some recommended extensions are added in `.vscode/extensions.json`. When starting VSCode, you will see a popup asking if you want to install them. Click yes. This will give you nice formatting, linting etc.
 
 ## Python
 
@@ -42,3 +48,7 @@ See [javascript/README.md](./javascript/README.md)
 ## Research
 
 - https://docs.google.com/spreadsheets/d/1JxU7ohP_io_oanKfflreld1SaABMPdboTUK2IQZmmCk/edit#gid=0
+
+## Contributing code
+
+- You can cannot commit code directly to `main`, you must make a PR and merge as squash commit instead.
