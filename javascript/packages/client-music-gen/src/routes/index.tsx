@@ -1,4 +1,4 @@
-import { Button, api, apiHooks } from "@musicbot/shared";
+import { Button, apiHooks } from "@musicbot/shared";
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 import Regions from "wavesurfer.js/plugins/regions";
