@@ -142,8 +142,12 @@ const absoluteFilePathToPublicPath = (absolutePath: string) => {
 export const IndexRoute = () => {
   const { mutateAsync } = apiHooks.useMutation("post", "/musicgen");
   const [lastCreatedRegion, setLastCreatedRegion] = useState<Region>();
-  const [prompt, setPrompt] = useState<string>("");
-  const [absoluteFilePath, setAbsoluteFilePath] = useState<string>("");
+  const [prompt, setPrompt] = useState<string>(
+    "A piano melody in the style of Bach"
+  );
+  const [absoluteFilePath, setAbsoluteFilePath] = useState<string>(
+    "/Users/sarimabbas/Developer/fsr/musicbot/javascript/packages/client-music-gen/public/audio/blinding_lights/blinding_lights_instrumental.mp3"
+  );
   const publicFilePath = absoluteFilePathToPublicPath(absoluteFilePath);
   const [generatedFilePath, setGeneratedFilePath] = useState<string>("");
   const isGenerateButtonDisabled =
