@@ -23,6 +23,7 @@ torch
 soundfile # read/write sound files
 librosa # music and audio analysis
 audiocraft # facebook model
+pydub # manipulate audio
 
 # other
 python-dotenv
