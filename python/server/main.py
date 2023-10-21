@@ -3,6 +3,7 @@ import os
 import random
 import subprocess
 from contextlib import asynccontextmanager
+import whisper
 
 import replicate
 import requests
@@ -132,3 +133,14 @@ def generate_music(body: MusicGenRequestBody):
 
     # Your code for generating musicx goes here
     return {"success": True}
+
+class LyricsGenRequestBody(BaseModel):
+    file_path: str
+    start_time: float
+    end_time: float
+
+@app.post("/whisper")
+def generate_lyrics(body: LyricsGenRequestBody): 
+    model = whisper.load_model("base")
+    result = model.transcribe(body.file_path)
+    print(result["text"])
