@@ -112,7 +112,7 @@ def generate_music(body: MusicGenRequestBody):
     print(output)
 
     # get the output audio from url
-    generated_audio_path = body.file_path + ".generated.mp3"
+    generated_audio_path = os.path.join(assetsDirname, "generated.mp3")
     response = requests.get(output)
     with open(generated_audio_path, "wb") as outfile:
         outfile.write(response.content)
@@ -128,7 +128,7 @@ def generate_music(body: MusicGenRequestBody):
     )
 
     # save the mutated audio
-    mutated_audio_path = os.path.join(assetsDirname, "mutated.mp3")
+    mutated_audio_path = body.file_path + ".generated.mp3"
     mutated_audio_segment.export(mutated_audio_path, format="mp3")
 
     # Your code for generating musicx goes here
