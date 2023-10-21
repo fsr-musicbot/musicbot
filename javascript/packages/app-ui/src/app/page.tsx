@@ -1,15 +1,17 @@
 "use client";
-import Dropzone from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 
 export default function Home() {
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+
+  console.log(acceptedFiles);
+
   return (
-    <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
-      {({ getRootProps, getInputProps }) => (
-        <div {...getRootProps()} className="h-10 bg-neutral-100 cursor-pointer">
-          <input {...getInputProps()} />
-          <p>Add audio file, or click to select files</p>
-        </div>
-      )}
-    </Dropzone>
+    <section className="container">
+      <div {...getRootProps({ className: "dropzone" })}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+    </section>
   );
 }
