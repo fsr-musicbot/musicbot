@@ -132,15 +132,17 @@ def generate_music(body: MusicGenRequestBody):
     mutated_audio_segment.export(mutated_audio_path, format="mp3")
 
     # Your code for generating musicx goes here
-    return {"success": True, "filepath": body.file_path}
+    return {"success": True, "filepath": mutated_audio_path}
+
 
 class LyricsGenRequestBody(BaseModel):
     file_path: str
     start_time: float
     end_time: float
 
+
 @app.post("/whisper")
-def generate_lyrics(body: LyricsGenRequestBody): 
+def generate_lyrics(body: LyricsGenRequestBody):
     model = whisper.load_model("base")
     result = model.transcribe(body.file_path)
     print(result["text"])

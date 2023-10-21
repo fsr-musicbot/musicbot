@@ -145,6 +145,7 @@ export const IndexRoute = () => {
   const [prompt, setPrompt] = useState<string>("");
   const [absoluteFilePath, setAbsoluteFilePath] = useState<string>("");
   const publicFilePath = absoluteFilePathToPublicPath(absoluteFilePath);
+  const [generatedFilePath, setGeneratedFilePath] = useState<string>("");
   const isGenerateButtonDisabled =
     prompt.length < 1 || typeof lastCreatedRegion === "undefined";
 
@@ -172,6 +173,15 @@ export const IndexRoute = () => {
           setLastCreatedRegion(region);
         }}
       />
+      {generatedFilePath && (
+        <WaveSurferPlayer
+          options={{
+            ...options,
+            url: absoluteFilePathToPublicPath(generatedFilePath),
+          }}
+          onRegionCreated={() => {}}
+        />
+      )}
       <div className="flex items-center gap-4">
         <input
           type="text"
@@ -192,10 +202,13 @@ export const IndexRoute = () => {
               const response = await mutateAsync({
                 prompt,
                 file_path: absoluteFilePath,
-                end_time: lastCreatedRegion.start,
-                start_time: lastCreatedRegion.end,
+                end_time: lastCreatedRegion.end,
+                start_time: lastCreatedRegion.start,
               });
-              console.log({ response });
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const filepath = (response as any).filepath;
+              console.log({ filepath });
+              setGeneratedFilePath(filepath);
             }
           }}
         >
