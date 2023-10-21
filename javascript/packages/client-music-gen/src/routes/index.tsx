@@ -1,5 +1,13 @@
 import { Button, apiHooks } from "@musicbot/shared";
-import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import cn from "clsx";
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 import Regions from "wavesurfer.js/plugins/regions";
 import Timeline from "wavesurfer.js/plugins/timeline";
@@ -31,14 +39,21 @@ const useWavesurfer = (
   return wavesurfer;
 };
 
+interface Region {
+  id: string;
+  start: number;
+  end: number;
+}
+
 interface WaveSurferPlayerProps {
   options: Partial<WaveSurferOptions>;
+  onRegionCreated: (region: Region) => void;
 }
 
 // Create a React component that will render wavesurfer.
 // Props are wavesurfer options.
 const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
-  const { options } = props;
+  const { options, onRegionCreated } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -70,12 +85,26 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
       regionsPlugin.on("region-clicked", (region) => {
         region.remove();
       }),
+
+      regionsPlugin.on("region-created", (region) => {
+        let start = region.start;
+        let end = region.end;
+        if (start > end) {
+          start = region.end;
+          end = region.start;
+        }
+        onRegionCreated({
+          id: region.id,
+          start,
+          end,
+        });
+      }),
     ];
 
     return () => {
       subscriptions.forEach((unsub) => unsub());
     };
-  }, [wavesurfer, regionsPlugin]);
+  }, [wavesurfer, regionsPlugin, onRegionCreated]);
 
   return (
     <div className="w-full">
@@ -97,39 +126,103 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
   );
 };
 
-export const IndexRoute = () => {
-  const { mutate } = apiHooks.useMutation("post", "/musicgen");
+const waveSurferOptions: Partial<WaveSurferOptions> = {
+  height: 100,
+  waveColor: "rgb(200, 0, 200)",
+  progressColor: "rgb(100, 0, 100)",
+  plugins: [Timeline.create(), Regions.create()],
+};
 
-  const { data } = apiHooks.useQuery("/");
-  console.log(data);
+const absoluteFilePathToPublicPath = (absolutePath: string) => {
+  const substring = "public";
+  const index = absolutePath.indexOf(substring);
+  return absolutePath.substring(index).replace("public", "");
+};
+
+export const IndexRoute = () => {
+  const { mutateAsync } = apiHooks.useMutation("post", "/musicgen");
+  const [lastCreatedRegion, setLastCreatedRegion] = useState<Region>();
+  const [prompt, setPrompt] = useState<string>(
+    "A piano melody in the style of Bach"
+  );
+  const [absoluteFilePath, setAbsoluteFilePath] = useState<string>(
+    "/Users/sarimabbas/Developer/fsr/musicbot/javascript/packages/client-music-gen/public/audio/blinding_lights/blinding_lights_instrumental.mp3"
+  );
+  const publicFilePath = absoluteFilePathToPublicPath(absoluteFilePath);
+  const [generatedFilePath, setGeneratedFilePath] = useState<string>("");
+  const isGenerateButtonDisabled =
+    prompt.length < 1 || typeof lastCreatedRegion === "undefined";
+
+  const options: Partial<WaveSurferOptions> = useMemo(
+    () => ({ ...waveSurferOptions, url: publicFilePath }),
+    [publicFilePath]
+  );
+  const [loading, setLoading] = useState<boolean>(false);
+
   // Render the wavesurfer component
   // and a button to load a different audio file
   return (
     <div className="container flex flex-col items-start gap-8 p-8 mx-auto">
       <h1 className="text-2xl font-bold">Musicbot</h1>
-      <WaveSurferPlayer
-        options={{
-          height: 100,
-          waveColor: "rgb(200, 0, 200)",
-          progressColor: "rgb(100, 0, 100)",
-          url: "/audio/one.mp3",
-          plugins: [Timeline.create(), Regions.create()],
+      <input
+        type="url"
+        placeholder="Absolute path to audio file (must be in public folder)"
+        className="w-full px-2 py-1 border rounded-md"
+        value={absoluteFilePath}
+        onChange={(e) => {
+          setAbsoluteFilePath(e.target.value);
         }}
       />
-      <Button
-        onClick={(e) => {
-          e.preventDefault();
-          console.log("welkjfwelk");
-          mutate({
-            file_path:
-              "/Users/sarimabbas/Developer/fsr/musicbot/javascript/packages/client-music-gen/public/audio/blinding_lights/blinding_lights_instrumental.mp3",
-            end_time: 10,
-            start_time: 2,
-          });
+      <WaveSurferPlayer
+        options={options}
+        onRegionCreated={(region) => {
+          setLastCreatedRegion(region);
         }}
-      >
-        Generate
-      </Button>
+      />
+      {generatedFilePath && (
+        <WaveSurferPlayer
+          options={{
+            ...options,
+            url: absoluteFilePathToPublicPath(generatedFilePath),
+          }}
+          onRegionCreated={() => {}}
+        />
+      )}
+      <div className="flex items-center w-full gap-4">
+        <input
+          type="text"
+          placeholder="Enter your prompt here"
+          className="w-full px-2 py-1 border rounded-md"
+          value={prompt}
+          onChange={(e) => {
+            setPrompt(e.target.value);
+          }}
+        />
+        <Button
+          disabled={isGenerateButtonDisabled}
+          className={cn({
+            isGenerateButtonDisabled: "cursor-not-allowed",
+          })}
+          onClick={async (e) => {
+            e.preventDefault();
+            if (lastCreatedRegion) {
+              setLoading(true);
+              const response = await mutateAsync({
+                prompt,
+                file_path: absoluteFilePath,
+                end_time: lastCreatedRegion.end,
+                start_time: lastCreatedRegion.start,
+              });
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const filepath = (response as any).filepath;
+              setGeneratedFilePath(filepath);
+              setLoading(false);
+            }
+          }}
+        >
+          {loading ? "Loading" : "Generate"}
+        </Button>
+      </div>
     </div>
   );
 };
