@@ -1,21 +1,23 @@
 import json
 import os
+import random
 import subprocess
 from contextlib import asynccontextmanager
 
 import replicate
+import requests
 from anyio.streams.file import FileWriteStream
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from .utils.main import mp3_to_base64_data_uri
-import requests
 
+from .utils.main import mp3_to_base64_data_uri
 
 load_dotenv()
 
 dirname = os.path.dirname(__file__)
+assetsDirname = os.path.join(dirname, "assets")
 
 
 @asynccontextmanager
@@ -64,7 +66,7 @@ def generate_music(body: MusicGenRequestBody):
     input_audio_path = body.file_path
 
     # extract a slice of audio from the file path and save it as tmp.mp3
-    sliced_audio_path = os.path.join(dirname, "sliced.mp3")
+    sliced_audio_path = os.path.join(assetsDirname, "sliced.mp3")
     subprocess.run(
         [
             "ffmpeg",
@@ -88,7 +90,7 @@ def generate_music(body: MusicGenRequestBody):
             # allows for conditioning on a melody
             "model_version": "melody",
             # prompt
-            "prompt": "a country guitar riff",
+            "prompt": "flute melody",
             # audio file to generate music from
             "input_audio": sliced_audio_data_uri,
             # number of seconds to generate
@@ -96,7 +98,10 @@ def generate_music(body: MusicGenRequestBody):
             # if true, then it will continue the input audio
             # if false, it will adopt the style of the input audio
             "continuation": True,
-            # can be wav or mp3
+            # I think replicate has some caching going on so cache busting might
+            # be needed
+            "seed": random.random(),
+            # mp3 or wav output
             "output_format": "mp3",
         },
     )
@@ -104,7 +109,7 @@ def generate_music(body: MusicGenRequestBody):
     print(output)
 
     # get the output audio from url
-    generated_audio_path = os.path.join(dirname, "generated.mp3")
+    generated_audio_path = os.path.join(assetsDirname, "generated.mp3")
     response = requests.get(output)
     with open(generated_audio_path, "wb") as outfile:
         outfile.write(response.content)
