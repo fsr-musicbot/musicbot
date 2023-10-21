@@ -167,6 +167,7 @@ export const IndexRoute = () => {
         type="url"
         placeholder="Absolute path to audio file (must be in public folder)"
         className="w-full px-2 py-1 border rounded-md"
+        value={absoluteFilePath}
         onChange={(e) => {
           setAbsoluteFilePath(e.target.value);
         }}
@@ -186,11 +187,12 @@ export const IndexRoute = () => {
           onRegionCreated={() => {}}
         />
       )}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center w-full gap-4">
         <input
           type="text"
           placeholder="Enter your prompt here"
-          className="px-2 py-1 border rounded-md"
+          className="w-full px-2 py-1 border rounded-md"
+          value={prompt}
           onChange={(e) => {
             setPrompt(e.target.value);
           }}
