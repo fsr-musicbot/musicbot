@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from pydub import AudioSegment
 
 from .utils.main import mp3_to_base64_data_uri
 
@@ -94,18 +95,18 @@ def generate_music(body: MusicGenRequestBody):
             # audio file to generate music from
             "input_audio": sliced_audio_data_uri,
             # number of seconds to generate
-            "duration": 8,
+            # we want to replace the input audio with the generated audio
+            "duration": int(abs(body.end_time - body.start_time)),
             # if true, then it will continue the input audio
             # if false, it will adopt the style of the input audio
-            "continuation": True,
+            "continuation": False,
             # I think replicate has some caching going on so cache busting might
             # be needed
-            "seed": random.random(),
+            "seed": random.randint(0, 100),
             # mp3 or wav output
             "output_format": "mp3",
         },
     )
-
     print(output)
 
     # get the output audio from url
@@ -114,5 +115,19 @@ def generate_music(body: MusicGenRequestBody):
     with open(generated_audio_path, "wb") as outfile:
         outfile.write(response.content)
 
-    # Your code for generating music goes here
+    # now mutate the original audio with the generated audio
+    input_audio_segment = AudioSegment.from_mp3(input_audio_path)
+    generated_audio_segment = AudioSegment.from_mp3(generated_audio_path)
+    mutated_audio_segment = (
+        # pydub expects milliseconds
+        input_audio_segment[: body.start_time * 1000]
+        + generated_audio_segment
+        + input_audio_segment[body.end_time * 1000 :]
+    )
+
+    # save the mutated audio
+    mutated_audio_path = os.path.join(assetsDirname, "mutated.mp3")
+    mutated_audio_segment.export(mutated_audio_path, format="mp3")
+
+    # Your code for generating musicx goes here
     return {"success": True}
