@@ -20,6 +20,7 @@
 
 ## Server
 
+0. Need a `REPLICATE_API_TOKEN` inside `python/server/.env` (create one if it doesn't exist)
 1. Run it using `make server`
 2. Serves on http://localhost:8000
 3. On startup, it will autogenerate `openapi.json`
