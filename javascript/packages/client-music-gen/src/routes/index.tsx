@@ -157,6 +157,7 @@ export const IndexRoute = () => {
     () => ({ ...waveSurferOptions, url: publicFilePath }),
     [publicFilePath]
   );
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Render the wavesurfer component
   // and a button to load a different audio file
@@ -205,6 +206,7 @@ export const IndexRoute = () => {
           onClick={async (e) => {
             e.preventDefault();
             if (lastCreatedRegion) {
+              setLoading(true);
               const response = await mutateAsync({
                 prompt,
                 file_path: absoluteFilePath,
@@ -213,12 +215,12 @@ export const IndexRoute = () => {
               });
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const filepath = (response as any).filepath;
-              console.log({ filepath });
               setGeneratedFilePath(filepath);
+              setLoading(false);
             }
           }}
         >
-          Generate
+          {loading ? "Loading" : "Generate"}
         </Button>
       </div>
     </div>
