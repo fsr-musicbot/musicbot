@@ -77,6 +77,7 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
     // allow creation of regions
     regionsPlugin.enableDragSelection({});
 
+    console.log;
     wavesurfer.on("decode", () => {
       for (let i = 0; i < props.lyrics.length; i++) {
         regionsPlugin.addRegion({
