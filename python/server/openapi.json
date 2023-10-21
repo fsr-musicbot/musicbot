@@ -86,13 +86,18 @@
           "end_time": {
             "type": "number",
             "title": "End Time"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
           }
         },
         "type": "object",
         "required": [
           "file_path",
           "start_time",
-          "end_time"
+          "end_time",
+          "prompt"
         ],
         "title": "MusicGenRequestBody"
       },
