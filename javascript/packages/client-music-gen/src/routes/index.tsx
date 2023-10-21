@@ -1,5 +1,13 @@
 import { Button, apiHooks } from "@musicbot/shared";
-import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import cn from "clsx";
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 import Regions from "wavesurfer.js/plugins/regions";
 import Timeline from "wavesurfer.js/plugins/timeline";
@@ -31,14 +39,21 @@ const useWavesurfer = (
   return wavesurfer;
 };
 
+interface Region {
+  id: string;
+  start: number;
+  end: number;
+}
+
 interface WaveSurferPlayerProps {
   options: Partial<WaveSurferOptions>;
+  onRegionCreated: (region: Region) => void;
 }
 
 // Create a React component that will render wavesurfer.
 // Props are wavesurfer options.
 const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
-  const { options } = props;
+  const { options, onRegionCreated } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -70,12 +85,20 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
       regionsPlugin.on("region-clicked", (region) => {
         region.remove();
       }),
+
+      regionsPlugin.on("region-created", (region) => {
+        onRegionCreated({
+          id: region.id,
+          end: region.end,
+          start: region.start,
+        });
+      }),
     ];
 
     return () => {
       subscriptions.forEach((unsub) => unsub());
     };
-  }, [wavesurfer, regionsPlugin]);
+  }, [wavesurfer, regionsPlugin, onRegionCreated]);
 
   return (
     <div className="w-full">
@@ -97,39 +120,81 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
   );
 };
 
+const waveSurferOptions: Partial<WaveSurferOptions> = {
+  height: 100,
+  waveColor: "rgb(200, 0, 200)",
+  progressColor: "rgb(100, 0, 100)",
+  plugins: [Timeline.create(), Regions.create()],
+};
+
+const absoluteFilePathToPublicPath = (absolutePath: string) => {
+  const substring = "public";
+  const index = absolutePath.indexOf(substring);
+  return absolutePath.substring(index).replace("public", "");
+};
+
 export const IndexRoute = () => {
   const { mutate } = apiHooks.useMutation("post", "/musicgen");
+  const [lastCreatedRegion, setLastCreatedRegion] = useState<Region>();
+  const [prompt, setPrompt] = useState<string>("");
+  const [absoluteFilePath, setAbsoluteFilePath] = useState<string>("");
+  const publicFilePath = absoluteFilePathToPublicPath(absoluteFilePath);
+  const isGenerateButtonDisabled =
+    prompt.length < 1 || typeof lastCreatedRegion === "undefined";
 
-  const { data } = apiHooks.useQuery("/");
-  console.log(data);
+  const options: Partial<WaveSurferOptions> = useMemo(
+    () => ({ ...waveSurferOptions, url: publicFilePath }),
+    [publicFilePath]
+  );
+
   // Render the wavesurfer component
   // and a button to load a different audio file
   return (
     <div className="container flex flex-col items-start gap-8 p-8 mx-auto">
       <h1 className="text-2xl font-bold">Musicbot</h1>
-      <WaveSurferPlayer
-        options={{
-          height: 100,
-          waveColor: "rgb(200, 0, 200)",
-          progressColor: "rgb(100, 0, 100)",
-          url: "/audio/one.mp3",
-          plugins: [Timeline.create(), Regions.create()],
+      <input
+        type="url"
+        placeholder="Absolute path to audio file (must be in public folder)"
+        className="w-full px-2 py-1 border rounded-md"
+        onChange={(e) => {
+          setAbsoluteFilePath(e.target.value);
         }}
       />
-      <Button
-        onClick={(e) => {
-          e.preventDefault();
-          console.log("welkjfwelk");
-          mutate({
-            file_path:
-              "/Users/sarimabbas/Developer/fsr/musicbot/javascript/packages/client-music-gen/public/audio/blinding_lights/blinding_lights_instrumental.mp3",
-            end_time: 10,
-            start_time: 2,
-          });
+      <WaveSurferPlayer
+        options={options}
+        onRegionCreated={(region) => {
+          setLastCreatedRegion(region);
         }}
-      >
-        Generate
-      </Button>
+      />
+      <div className="flex items-center gap-4">
+        <input
+          type="text"
+          placeholder="Enter your prompt here"
+          className="px-2 py-1 border rounded-md"
+          onChange={(e) => {
+            setPrompt(e.target.value);
+          }}
+        />
+        <Button
+          disabled={isGenerateButtonDisabled}
+          className={cn({
+            isGenerateButtonDisabled: "cursor-not-allowed",
+          })}
+          onClick={(e) => {
+            e.preventDefault();
+            if (lastCreatedRegion) {
+              mutate({
+                prompt,
+                file_path: absoluteFilePath,
+                end_time: lastCreatedRegion.start,
+                start_time: lastCreatedRegion.end,
+              });
+            }
+          }}
+        >
+          Generate
+        </Button>
+      </div>
     </div>
   );
 };

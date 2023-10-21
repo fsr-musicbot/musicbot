@@ -67,6 +67,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
+      clsx:
+        specifier: ^2.0.0
+        version: 2.0.0
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
