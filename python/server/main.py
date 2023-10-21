@@ -60,6 +60,7 @@ class MusicGenRequestBody(BaseModel):
     file_path: str
     start_time: float
     end_time: float
+    prompt: str
 
 
 @app.post("/musicgen")
@@ -91,7 +92,7 @@ def generate_music(body: MusicGenRequestBody):
             # allows for conditioning on a melody
             "model_version": "melody",
             # prompt
-            "prompt": "flute melody",
+            "prompt": body.prompt,
             # audio file to generate music from
             "input_audio": sliced_audio_data_uri,
             # number of seconds to generate
