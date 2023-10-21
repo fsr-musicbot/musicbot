@@ -31,3 +31,6 @@ requests
 # server
 fastapi
 uvicorn[standard]
+
+# APIs
+replicate

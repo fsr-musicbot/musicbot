@@ -3,11 +3,16 @@ import os
 import subprocess
 from contextlib import asynccontextmanager
 
+import replicate
 from anyio.streams.file import FileWriteStream
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from .musicgen.main import run_musicgen
+import requests
+
+
+load_dotenv()
 
 dirname = os.path.dirname(__file__)
 
@@ -55,7 +60,6 @@ class MusicGenRequestBody(BaseModel):
 
 @app.post("/musicgen")
 def generate_music(body: MusicGenRequestBody):
-    path = os.path.join(dirname, "tmp.mp3")
     # extract a slice of audio from the file path and save it as tmp.mp3
     subprocess.run(
         [
@@ -67,11 +71,35 @@ def generate_music(body: MusicGenRequestBody):
             str(body.start_time),
             "-to",
             str(body.end_time),
-            path,
+            os.path.join(dirname, "tmp.mp3"),
         ]
     )
 
-    run_musicgen()
+    # send it to musicgen
+    with open(os.path.join(dirname, "tmp.mp3"), "rb") as infile:
+        output = replicate.run(
+            "meta/musicgen:7a76a8258b23fae65c5a22debb8841d1d7e816b75c2f24218cd2bd8573787906",
+            input={
+                # allows for conditioning on a melody
+                "model_version": "melody",
+                # prompt
+                "prompt": "a country guitar riff",
+                # audio file to generate music from
+                "input_audio": infile,
+                # number of seconds to generate
+                "duration": 8,
+                # if true, then it will continue the input audio
+                # if false, it will adopt the style of the input audio
+                "continuation": True,
+                # can be wav or mp3
+                "output_format": "mp3",
+            },
+        )
+
+    # get the output audio from url
+    response = requests.get(output)
+    with open(os.path.join(dirname, "out.mp3"), "wb") as outfile:
+        outfile.write(response.content)
 
     # Your code for generating music goes here
     return {"success": True}
