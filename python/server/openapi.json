@@ -56,6 +56,42 @@
           }
         }
       }
+    },
+    "/whisper": {
+      "post": {
+        "summary": "Generate Lyrics",
+        "operationId": "generate_lyrics_whisper_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LyricsGenRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -72,6 +108,29 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "LyricsGenRequestBody": {
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "title": "File Path"
+          },
+          "start_time": {
+            "type": "number",
+            "title": "Start Time"
+          },
+          "end_time": {
+            "type": "number",
+            "title": "End Time"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file_path",
+          "start_time",
+          "end_time"
+        ],
+        "title": "LyricsGenRequestBody"
       },
       "MusicGenRequestBody": {
         "properties": {
