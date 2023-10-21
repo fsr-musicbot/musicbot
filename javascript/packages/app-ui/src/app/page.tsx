@@ -105,7 +105,7 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
     return () => {
       subscriptions.forEach((unsub) => unsub());
     };
-  }, [wavesurfer, regionsPlugin]);
+  }, [wavesurfer, regionsPlugin, props.lyrics]);
 
   return (
     <div className="w-full">
@@ -129,7 +129,9 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
 
 export default function Home() {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
-  const [transcription, setTranscription] = useState<any>(null);
+  const [transcription, setTranscription] = useState<WhisperSegment[] | null>(
+    null
+  );
   const handleSubmitAudio = async (acceptedFiles: File[]) => {
     console.log(acceptedFiles[0]);
 
@@ -177,7 +179,7 @@ export default function Home() {
           </section>
         )}
       </Dropzone>
-      {audioUrl && (
+      {audioUrl && transcription && (
         <WaveSurferPlayer
           lyrics={transcription}
           options={{

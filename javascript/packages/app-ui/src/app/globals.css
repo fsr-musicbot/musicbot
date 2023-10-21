@@ -5,4 +5,9 @@
 body {
   color: black;
   background: white;
+  font-size: 8px !important;
+}
+
+#waveform ::part(region) {
+  font-size: 8px !important;
 }
