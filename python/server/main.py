@@ -112,7 +112,7 @@ def generate_music(body: MusicGenRequestBody):
     print(output)
 
     # get the output audio from url
-    generated_audio_path = os.path.join(assetsDirname, "generated.mp3")
+    generated_audio_path = body.file_path + ".generated.mp3"
     response = requests.get(output)
     with open(generated_audio_path, "wb") as outfile:
         outfile.write(response.content)
