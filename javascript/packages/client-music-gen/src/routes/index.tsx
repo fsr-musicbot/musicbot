@@ -87,10 +87,16 @@ const WaveSurferPlayer = (props: WaveSurferPlayerProps) => {
       }),
 
       regionsPlugin.on("region-created", (region) => {
+        let start = region.start;
+        let end = region.end;
+        if (start > end) {
+          start = region.end;
+          end = region.start;
+        }
         onRegionCreated({
           id: region.id,
-          end: region.end,
-          start: region.start,
+          start,
+          end,
         });
       }),
     ];
@@ -134,7 +140,7 @@ const absoluteFilePathToPublicPath = (absolutePath: string) => {
 };
 
 export const IndexRoute = () => {
-  const { mutate } = apiHooks.useMutation("post", "/musicgen");
+  const { mutateAsync } = apiHooks.useMutation("post", "/musicgen");
   const [lastCreatedRegion, setLastCreatedRegion] = useState<Region>();
   const [prompt, setPrompt] = useState<string>("");
   const [absoluteFilePath, setAbsoluteFilePath] = useState<string>("");
@@ -180,15 +186,16 @@ export const IndexRoute = () => {
           className={cn({
             isGenerateButtonDisabled: "cursor-not-allowed",
           })}
-          onClick={(e) => {
+          onClick={async (e) => {
             e.preventDefault();
             if (lastCreatedRegion) {
-              mutate({
+              const response = await mutateAsync({
                 prompt,
                 file_path: absoluteFilePath,
                 end_time: lastCreatedRegion.start,
                 start_time: lastCreatedRegion.end,
               });
+              console.log({ response });
             }
           }}
         >
