@@ -129,5 +129,5 @@ def generate_music(body: MusicGenRequestBody):
     mutated_audio_path = os.path.join(assetsDirname, "mutated.mp3")
     mutated_audio_segment.export(mutated_audio_path, format="mp3")
 
-    # Your code for generating music goes here
+    # Your code for generating musicx goes here
     return {"success": True}
